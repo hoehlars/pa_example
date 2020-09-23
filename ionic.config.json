@@ -1,0 +1,7 @@
+{
+  "name": "pa_example",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
