@@ -1,7 +1,26 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
+
+jobs:
+  test:
+    docker:
+      - image: cimg/node:<node-version>
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+      - run:
+          name: install packages
+          command: npm ci
+      - save_cache:
+          key: node-deps-v1-{{ .Branch }}-{{checksum "package-lock.json"}}
+          paths:
+            - ~/.npm
+      - run:
+          name: Run Tests
+          command: npm run test
+
 workflows:
-  node-tests:
+  test_my_app:
     jobs:
-      - node/test
+      - test
