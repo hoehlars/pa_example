@@ -19,9 +19,6 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-      - name: Add cap android
-        run: | 
-          ionic cap add android
       - name: Make greadlew executable
         run: cd android && chmod +x ./gradlew
       - name: Build Android Release
